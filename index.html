@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="sl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#007AFF">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Kalkulator palet</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:#f2f2f7;display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0}
+.card{background:#fff;padding:20px;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.12);width:340px}
+input,button{width:100%;padding:12px;border-radius:10px;font-size:17px;box-sizing:border-box;margin:8px 0}
+button{background:#007AFF;color:#fff;border:none}
+.out{margin-top:12px;background:#f7f7f7;padding:12px;border-radius:10px;line-height:1.7}
+</style></head><body><div class="card">
+<h2>📦 Kalkulator palet</h2>
+<label>Čas za 1 paleto (s)</label>
+<input id=t type=number step=0.01 value=30.25>
+<label>Palet na vozičku</label>
+<input id=c type=number value=9>
+<button onclick="calc()">Izračunaj</button>
+<div class="out" id=o></div>
+</div>
+<script>
+function calc(){
+let t=parseFloat(ti.value),c=parseFloat(ci.value);
+if(!t||!c)return;
+let total=t*c,m=Math.floor(total/60),s=(total%60).toFixed(2);
+o.innerHTML=`<b>Čas za voziček:</b> ${m} min ${s} s<br>
+<b>Palet na uro:</b> ${(3600/t).toFixed(2)}<br>
+<b>Vozičkov na uro:</b> ${(3600/total).toFixed(2)}`;
+}
+const ti=document.getElementById('t'),ci=document.getElementById('c'),o=document.getElementById('o');
+calc();
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js')}
+</script></body></html>
